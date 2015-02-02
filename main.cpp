@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <SDL2/SDL.h>
+#include "AL.h"
 
 int main(int argc, char** argv)
 {

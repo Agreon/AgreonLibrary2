@@ -8,7 +8,7 @@
 #ifndef AL_H
 #define	AL_H
 
-#include <SDL2/SDL.h>
+#include "Graphics.h"
 
 #endif	/* AL_H */
 
