@@ -15,13 +15,23 @@ namespace AL
 {
     class Log
     {
+    private:
     public:
+            static void reset()
+            {
+                std::ofstream stream;
+                stream.open("log.txt");
+                stream.close();
+            }
+            
             static void write(std::string text)
             {
                 std::ofstream stream;
-                /*if(m_Filename == NULL)
+               /* if(m_Filename == "")
                 {
                     m_Filename = "log.txt";
+                    stream.open(m_Filename);
+                    stream.close();
                 }*/
 
                 stream.open("log.txt", std::ios::out | std::ios::app);
@@ -33,7 +43,7 @@ namespace AL
 
                 time_t t = time(0);  
                 struct tm * now = localtime(&t);
-                stream << "[ ";
+                stream << "[";
 
                 if( now->tm_hour < 10 )
                 {
@@ -51,9 +61,12 @@ namespace AL
                 {
                     stream << "0";
                 }
-                stream << now->tm_sec << " ] ";
+                stream << now->tm_sec << "] ";
 
                 stream << text << std::endl;
+                
+                std::cout << text << std::endl;
+                
                 stream.close();
             }
     };

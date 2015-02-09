@@ -19,6 +19,9 @@
 
 namespace AL
 { 
+    typedef unsigned int uint;
+    typedef unsigned short ushort;
+
     /** 
     *	@brief Cares about OpenGL initialization, window handling and drawing.
     *
@@ -37,6 +40,8 @@ namespace AL
         SDL_Window* m_Window;
         int         m_Screen_Width;
         int         m_Screen_Height;
+        
+        SDL_GLContext m_GLcontext;
         
         /**
          * Contains all textures, with their identifiers. 
@@ -213,6 +218,11 @@ namespace AL
 	*/
 	//void setFontSize(int size);
 
+        /**
+         * Swaps the Screen.
+         */
+        void swapWindow();
+        
 	/**
 	*   Closes the window and deletes the pointers.
 	*/

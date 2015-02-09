@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>AL.h</itemPath>
       <itemPath>Graphics.h</itemPath>
+      <itemPath>Input.h</itemPath>
       <itemPath>Log.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -16,6 +17,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Graphics.cpp</itemPath>
+      <itemPath>Input.cpp</itemPath>
       <itemPath>Log.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -42,6 +44,9 @@
       <compileType>
         <ccTool>
           <standard>8</standard>
+          <incDir>
+            <pElem>../../../../../SDL_MINGW/SDL2-2.0.3/include</pElem>
+          </incDir>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -54,6 +59,10 @@
       <item path="Graphics.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Graphics.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Input.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Input.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Log.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -87,6 +96,10 @@
       <item path="Graphics.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Graphics.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Input.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Input.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Log.cpp" ex="false" tool="1" flavor2="0">
       </item>

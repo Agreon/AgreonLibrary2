@@ -1,0 +1,2 @@
+[16:47:36] Initialized Window and OpenGL.
+[16:47:36] Loaded texture successfully. agreon_logo | data/agreon_logo.png

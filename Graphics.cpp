@@ -23,6 +23,7 @@ namespace AL
 
     void Graphics::init(int screen_width, int screen_height, const char* windowTitle, const char* iconSrc)
     {
+            Log::reset();
             m_Screen_Width  = screen_width;
             m_Screen_Height = screen_height;
 
@@ -39,6 +40,7 @@ namespace AL
             {
                 Log::write(std::string("Error while creating window: ") + SDL_GetError());                    
             }
+            
             if(windowTitle != NULL)
             {
                 SDL_SetWindowTitle(m_Window, windowTitle);
@@ -46,12 +48,13 @@ namespace AL
 
             initOpenGL();
             
-         //   Log() << "Initialized Window and OpenGL.";  
             Log::write("Initialized Window and OpenGL.");
     }
 
     void Graphics::initOpenGL()
-    {
+    {        
+        m_GLcontext = SDL_GL_CreateContext(m_Window);
+                
         glViewport(0, 0 ,m_Screen_Width, m_Screen_Height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -73,10 +76,11 @@ namespace AL
         glEnable(GL_BLEND);
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_SCISSOR_TEST);
+        
     }
 
 
-    bool Graphics::loadTexture( const char* path, std::string name )
+    bool Graphics::loadTexture(const char* path, std::string name)
     {
         uint id = 0;
         SDL_Surface* img = IMG_Load( path );
@@ -86,27 +90,14 @@ namespace AL
             glDisable( GL_TEXTURE_2D );
             return false;
         }
-
-       // SDL_PixelFormat form = {NULL,32,4,0,0,0,0,0,0,0,0,0xff000000,0x00ff0000,0x0000ff00,0x000000ff,0,255};
-        SDL_PixelFormat form = {NULL,NULL,4,0,0,0,0,0,0,0,0,0xff000000,0x00ff0000,0x0000ff00,0x000000ff,0,255};
-
-        SDL_Surface* img2 = SDL_ConvertSurface( img, &form, SDL_SWSURFACE );
-
-        if( img2 == NULL )
-        {
-            Log::write(std::string("ERROR: Texture was not loaded! Path: ") + path);
-            glDisable( GL_TEXTURE_2D );
-            return false;
-        }
-
-        glGenTextures(1, &id);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8, img2->pixels);
+ 
+        glGenTextures( 1, &id );
+        glBindTexture( GL_TEXTURE_2D, id );
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, img->w,img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels );
         SDL_FreeSurface(img);
-        SDL_FreeSurface(img2);
-
+        
         m_Textures[ name ] = id;
         
         std::string msg = "Loaded texture successfully. "+name+" | "+path;       
@@ -413,12 +404,17 @@ namespace AL
             m_CurrentFont->FaceSize( size );
     }*/
 
-
+    void Graphics::swapWindow()
+    {
+        SDL_GL_SwapWindow(m_Window);
+    }
 
     void Graphics::shutdown()
     {
         //delete m_Window;
          //m_Window = 0;
+        SDL_GL_DeleteContext(m_GLcontext);
+        
         SDL_DestroyWindow(m_Window);
           //  delete m_CurrentFont;
            // m_CurrentFont = 0;
