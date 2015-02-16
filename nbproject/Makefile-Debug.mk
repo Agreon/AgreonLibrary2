@@ -56,7 +56,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lSDL2main -lSDL2 -lGL -lSDL2_image -lSDL2_mixer
+LDLIBSOPTIONS=-lSDL2main -lSDL2 -lGL -lSDL2_image -lSDL2_mixer -lftgl
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -69,27 +69,27 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/agreonlibrary2: ${OBJECTFILES}
 ${OBJECTDIR}/Graphics.o: Graphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Graphics.o Graphics.cpp
+	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -I/usr/include/freetype2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Graphics.o Graphics.cpp
 
 ${OBJECTDIR}/Input.o: Input.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Input.o Input.cpp
+	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -I/usr/include/freetype2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Input.o Input.cpp
 
 ${OBJECTDIR}/Log.o: Log.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Log.o Log.cpp
+	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -I/usr/include/freetype2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Log.o Log.cpp
 
 ${OBJECTDIR}/Sound.o: Sound.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sound.o Sound.cpp
+	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -I/usr/include/freetype2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sound.o Sound.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -I/usr/include/freetype2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

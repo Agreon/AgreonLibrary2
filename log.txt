@@ -1,4 +1,4 @@
-[22:06:41] Initialized Window and OpenGL.
-[22:06:41] Loaded texture successfully. agreon_logo | data/agreon_logo.png
-[22:06:41] Loaded Sound file successful. wolf_howl | data/wolf_howl.wav
-[22:07:15] Shutting down Sound...
+[23:27:06] Initialized Window and OpenGL.
+[23:27:06] Loaded texture successfully. agreon_logo | data/agreon_logo.png
+[23:27:06] Loaded font file successful. roboto | data/roboto.ttf
+[23:27:06] Loaded Sound file successful. wolf_howl | data/wolf_howl.wav

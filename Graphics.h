@@ -11,6 +11,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_image.h>
+#include <ft2build.h> 
+#include FT_FREETYPE_H
+#include <FTGL/ftgl.h>
 
 #include <iostream>
 #include <map>
@@ -22,6 +25,38 @@ namespace AL
     typedef unsigned int uint;
     typedef unsigned short ushort;
 
+    struct color
+    {
+        double r,g,b,a;
+        
+        /**
+        *   Constructor. Use values between 0 and 1. Sets the alpha value to 1.
+        * 
+        *   @param	r The red color.
+	*   @param	g The green color.
+	*   @param	b The blue color.
+         */
+        color(double _r, double _g, double _b)
+        : r(_r),
+        g(_g),
+        b(_b),
+        a(1){}
+        
+        /**
+        *   Constructor. Use values between 0 and 1. 
+        * 
+        *   @param	r The red color.
+	*   @param	g The green color.
+	*   @param	b The blue color.
+	*   @param	a The alpha value.
+         */
+        color(double _r, double _g, double _b, double _a)
+        : r(_r),
+        g(_g),
+        b(_b),
+        a(_a){}
+    };
+    
     /** 
     *	@brief Cares about OpenGL initialization, window handling and drawing.
     *
@@ -43,11 +78,13 @@ namespace AL
         
         SDL_GLContext m_GLcontext;
         
+        FTGLPixmapFont* m_CurrentFont;      
+        
         /**
          * Contains all textures, with their identifiers. 
          */
-        std::map<std::string, uint> m_Textures;       
-        
+        std::map<std::string, uint> m_Textures;      
+        std::map<std::string, FTGLPixmapFont*> m_Fonts;        
     public:
         Graphics();
         ~Graphics();
@@ -128,12 +165,9 @@ namespace AL
 	/**
 	*   Sets the color that will modify the textures.
 	*
-	*   @param r    The red color.
-	*   @param g    The green color.
-	*   @param b    The blue color.
-	*   @param a    The alpha value.
+	*   @param c    The color.
 	*/
-	void setColor(double r, double g, double b, double a);
+	void setColor(color c);
 
 	/**
 	*   Selects a texture to work with.
@@ -174,7 +208,7 @@ namespace AL
 	*   @param x    The x coordinate.
 	*   @param y	The y coordinate.
 	*/
-	//void drawText(const char* text, int x, int y);
+	void drawText(const char* text, int x, int y);
 
 	/**
 	*   Draws a number on the screen.
@@ -183,40 +217,39 @@ namespace AL
 	*   @param x    The x coordinate.
 	*   @param y    The y coordinate.
 	*/
-	//void drawNumber(int num, int x, int y);
+	void drawNumber(int num, int x, int y);
 
 	/**
 	*   Sets the font face.
 	*	
-	*   @param name The name of the font.
+	*   @param name      The name of the font.
+        *   @param fontSize  The initial size of the font.
+        *   @param fontColor The initial color of the font.
 	*/
-	//void setFont(std::string name);
+	void setFont(std::string name, ushort fontSize, color fontColor);
 
 	/**
 	*   Loads a fontfile from a given path and stores it in a map.
 	*
 	*   @param path The Path of the fontfile.
-	*   @param name The Name of the font.
+	*   @param name The Naame of the font.
 	*   @returns    If the texture was successfully loaded.
 	*/
-	//bool loadFont(const char* font, std::string name);
+	bool loadFont(const char* font, std::string name);
 
 	/**
 	*   Sets the font color.
-	*   Values between 1 and 0.
 	*	
-	*   @param r    The red color of the font.
-	*   @param g    The green color of the font.
-	*   @param b    The blue color of the font.
+	*   @param c    The color of the font.
 	*/
-	//void setFontColor(double r, double g, double b);
+	void setFontColor(color c);
 
 	/**
 	*   Sets the size of the font.
 	*	
 	*   @param size The size of the font.
 	*/
-	//void setFontSize(int size);
+	void setFontSize(int size);
 
         /**
          * Swaps the Screen.

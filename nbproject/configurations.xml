@@ -48,11 +48,12 @@
           <standard>8</standard>
           <incDir>
             <pElem>../../../../../SDL_MINGW/SDL2-2.0.3/include</pElem>
+            <pElem>/usr/include/freetype2</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
-            <linkerOptionItem>-lSDL2main -lSDL2 -lGL -lSDL2_image -lSDL2_mixer</linkerOptionItem>
+            <linkerOptionItem>-lSDL2main -lSDL2 -lGL -lSDL2_image -lSDL2_mixer -lftgl</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

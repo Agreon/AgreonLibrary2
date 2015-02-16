@@ -8,8 +8,6 @@
 #include <iostream>
 #include <memory>
 #include "AL.h"
-#include "Input.h"
-#include "Sound.h"
 
 int main(int argc, char** argv)
 {
@@ -22,20 +20,23 @@ int main(int argc, char** argv)
     SDL_Event event;
     bool running = true;
     
-    std::auto_ptr<AL::Graphics> g(new AL::Graphics);
-    std::auto_ptr<AL::Input> input(new AL::Input);
-    std::auto_ptr<AL::Sound> sound(new AL::Sound);
-    
-    g->init(800,600,"Agreon Library 2",NULL);
+    AL::Graphics *graphics = new AL::Graphics();
+    AL::Input *input = new AL::Input();
+    AL::Sound *sound = new AL::Sound();
         
-    if(!g->loadTexture("data/agreon_logo.png","agreon_logo"))
+    graphics->init(800,600,"Agreon Library 2",NULL);
+        
+    if(!graphics->loadTexture("data/agreon_logo.png","agreon_logo")
+    || !graphics->loadFont("data/roboto.ttf","roboto"))
     {
         running = false;
     }
+    graphics->setFont("roboto", 50, AL::color(1,1,1,0.2));
     
-    AL::Graphics *g2 = new AL::Graphics();
-        
-    if(!sound->loadSound("data/wolf_howl.wav","wolf_howl"));
+    if(!sound->loadSound("data/wolf_howl.wav","wolf_howl"))
+    {
+        running = false;
+    }
     
     sound->playSound("wolf_howl");
     sound->setVolume(10);
@@ -55,9 +56,10 @@ int main(int argc, char** argv)
                  
         glClear(GL_COLOR_BUFFER_BIT);
                         
-        g->drawTexture("agreon_logo",0,0);      
+        graphics->drawTexture("agreon_logo",0,0);      
+        graphics->drawText("Agreon Library 2.0",200,500);
         
-        g->swapWindow();
+        graphics->swapWindow();
     }
     
     SDL_Quit();

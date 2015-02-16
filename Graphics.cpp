@@ -109,95 +109,95 @@ namespace AL
 
     bool Graphics::drawTexture( std::string ID, int x, int y )
     {
-            return drawTexture( ID, x, y, 0, 1 );
+        return drawTexture( ID, x, y, 0, 1 );
     }
 
 
     bool Graphics::drawTexture( std::string ID, int x, int y, int rotation )
     {
-            return drawTexture( ID, x, y, rotation, 1 );
+        return drawTexture( ID, x, y, rotation, 1 );
     }
 
 
     bool Graphics::drawTexture( std::string ID, int x, int y, int rotation, double scale )
     {
-            int w;
-            int h;
+        int w;
+        int h;
 
-            if( m_Textures[ ID ] == NULL )
-            {
-                Log::write(std::string("ERROR: Can't draw texture with unkown ID! ID: ")+ID);
-                return false;
-            }
+        if( m_Textures[ ID ] == NULL )
+        {
+            Log::write(std::string("ERROR: Can't draw texture with unkown ID! ID: ")+ID);
+            return false;
+        }
 
-            glEnable( GL_TEXTURE_2D );
-            glBindTexture( GL_TEXTURE_2D, m_Textures[ ID ] );
+        glEnable( GL_TEXTURE_2D );
+        glBindTexture( GL_TEXTURE_2D, m_Textures[ ID ] );
 
-            glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w );
-            glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h );
+        glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w );
+        glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h );
 
-            glPushMatrix();
+        glPushMatrix();
 
-            glScalef( scale, scale , 0 );
+        glScalef( scale, scale , 0 );
 
             /// Rotation
-            glTranslatef(x + w/2, y + h/2, 0);
-            glRotatef( rotation, 0, 0, 1 );
-            glTranslatef(-x - w/2, -y - h/2, 0);
+        glTranslatef(x + w/2, y + h/2, 0);
+        glRotatef( rotation, 0, 0, 1 );
+        glTranslatef(-x - w/2, -y - h/2, 0);
 
-            glBegin( GL_QUADS );
-                    glTexCoord2f(0,0); glVertex2f(x,y);
-                    glTexCoord2f(1,0); glVertex2f(x+w,y);
-                    glTexCoord2f(1,1); glVertex2f(x+w,y+h);
-                    glTexCoord2f(0,1); glVertex2f(x,y+h);
-            glEnd();
-            glDisable( GL_TEXTURE_2D );
+        glBegin( GL_QUADS );
+            glTexCoord2f(0,0); glVertex2f(x,y);
+            glTexCoord2f(1,0); glVertex2f(x+w,y);
+            glTexCoord2f(1,1); glVertex2f(x+w,y+h);
+            glTexCoord2f(0,1); glVertex2f(x,y+h);
+        glEnd();
+        glDisable( GL_TEXTURE_2D );
 
-            glPopMatrix();
+        glPopMatrix();
 
-            return true;
+        return true;
     }
 
 
     void Graphics::drawSection( std::string texture, int rectX, int rectY, int rectW, int rectH, int posX, int posY, int rotation )
     {
-            uint id= getUint( texture );
-            int textureWidth;
-            int textureHeight;
+        uint id= getUint( texture );
+        int textureWidth;
+        int textureHeight;
 
-            glEnable( GL_TEXTURE_2D );
-            glBindTexture( GL_TEXTURE_2D, id );
-
-
-            // Get width and height of the texture
-            glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &textureWidth );
-            glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &textureHeight );
+        glEnable( GL_TEXTURE_2D );
+        glBindTexture( GL_TEXTURE_2D, id );
 
 
-            double texLeft = (double)rectX / (double)textureWidth;
-            double texRight = ((double)rectX + (double)rectW) / (double)textureWidth;
-            double texTop = (double)rectY / (double)textureHeight;
-            double texBottom = ((double)rectY + (double)rectH) / (double)textureHeight;
+        // Get width and height of the texture
+        glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &textureWidth );
+        glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &textureHeight );
 
-            glPushMatrix();
 
-            // Rotation
-            glTranslatef(rectX + rectW/2,rectY + rectH/2,0);
-            glRotatef(rotation,0,0,1);
-            glTranslatef(-rectX - rectW/2,-rectY - rectH/2,0);
+        double texLeft = (double)rectX / (double)textureWidth;
+        double texRight = ((double)rectX + (double)rectW) / (double)textureWidth;
+        double texTop = (double)rectY / (double)textureHeight;
+        double texBottom = ((double)rectY + (double)rectH) / (double)textureHeight;
 
-            glBegin( GL_QUADS );
-                    glTexCoord2f(texLeft,texTop); glVertex2f( posX, posY );
-                    glTexCoord2f(texRight,texTop); glVertex2f( posX+rectW, posY );
-                    glTexCoord2f(texRight,texBottom); glVertex2f( posX+rectW, posY+rectH );
-            glTexCoord2f(texLeft,texBottom); glVertex2f( posX, posY+rectH );
-            glEnd();
-            glDisable( GL_TEXTURE_2D );
+        glPushMatrix();
 
-            glPopMatrix();
-            //glLoadIdentity();
+        // Rotation
+        glTranslatef(rectX + rectW/2,rectY + rectH/2,0);
+        glRotatef(rotation,0,0,1);
+        glTranslatef(-rectX - rectW/2,-rectY - rectH/2,0);
 
-            glDisable( GL_TEXTURE_2D );
+        glBegin( GL_QUADS );
+            glTexCoord2f(texLeft,texTop); glVertex2f( posX, posY );
+            glTexCoord2f(texRight,texTop); glVertex2f( posX+rectW, posY );
+            glTexCoord2f(texRight,texBottom); glVertex2f( posX+rectW, posY+rectH );
+        glTexCoord2f(texLeft,texBottom); glVertex2f( posX, posY+rectH );
+        glEnd();
+        glDisable( GL_TEXTURE_2D );
+
+        glPopMatrix();
+        //glLoadIdentity();
+
+        glDisable( GL_TEXTURE_2D );
     }
 
     /*
@@ -263,146 +263,164 @@ namespace AL
 
     void Graphics::drawRectangle( int x, int y, int w, int h )
     {
-            glBegin( GL_QUADS );
-                    glVertex2f( x, y );
-                    glVertex2f( x + w, y );
-                    glVertex2f( x + w, y + h );
-                    glVertex2f( x, y + h );
-            glEnd();
+        glBegin( GL_QUADS );
+                glVertex2f( x, y );
+                glVertex2f( x + w, y );
+                glVertex2f( x + w, y + h );
+                glVertex2f( x, y + h );
+        glEnd();
     }
 
 
-    void Graphics::setColor( double r, double g, double b, double a )
+    void Graphics::setColor( color c )
     {
-            glColor4d( r, g, b, a );
+        glColor4d( c.r, c.g, c.b, c.a );
     }
 
 
     void Graphics::bindTexture( std::string ID )
     {
-            glBindTexture( GL_TEXTURE_2D, m_Textures[ID] );
+        glBindTexture( GL_TEXTURE_2D, m_Textures[ID] );
     }
 
 
     uint Graphics::getUint( std::string ID )
     {
-            if(m_Textures[ID] == NULL)
-            {
-               Log::write(std::string("ERROR: Can not get UINT of texture with unkown ID! ID: ")+ID);
-               return m_Textures[0];
-            }
-            return m_Textures[ID];
+        if(m_Textures[ID] == NULL)
+        {
+            Log::write(std::string("ERROR: Can not get UINT of texture with unkown ID! ID: ")+ID);
+            return m_Textures[0];
+        }
+        return m_Textures[ID];
     }
 
 
     int Graphics::getTextureWidth( std::string ID )
     {
-            if(m_Textures[ID] == NULL)
-            {
-                Log::write(std::string("ERROR: Can not get width of texture with unkown ID! ID: ")+ID);
-                return m_Textures[0];
-            }
+        if(m_Textures[ID] == NULL)
+        {
+            Log::write(std::string("ERROR: Can not get width of texture with unkown ID! ID: ")+ID);
+            return m_Textures[0];
+        }
 
-            int width;
+        int width;
 
-            glEnable(GL_TEXTURE_2D);
-            glBindTexture( GL_TEXTURE_2D, m_Textures[ID] );
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture( GL_TEXTURE_2D, m_Textures[ID] );
 
-            glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width );
+        glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width );
 
-            glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D);
 
-            return width;
+        return width;
     }
 
 
     int Graphics::getTextureHeight( std::string ID )
     {
-            if(m_Textures[ID] == NULL)
-            {
-                Log::write(std::string("ERROR: Can not get height of texture with unkown ID! ID: ")+ID);
-                return m_Textures[0];
-            }
+        if(m_Textures[ID] == NULL)
+        {
+            Log::write(std::string("ERROR: Can not get height of texture with unkown ID! ID: ")+ID);
+            return m_Textures[0];
+        }
 
-            int height;
+        int height;
 
-            glEnable(GL_TEXTURE_2D);
-            glBindTexture( GL_TEXTURE_2D, m_Textures[ID] );
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture( GL_TEXTURE_2D, m_Textures[ID] );
 
-            glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height );
+        glGetTexLevelParameteriv( GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height );
 
-            glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D);
 
-            return height;
+        return height;
     }
 
 
-    /*void Graphics::drawText( const char* text, int x, int y )
+    void Graphics::drawText( const char* text, int x, int y )
     {
+        if(m_CurrentFont != NULL)
+        {
             glRasterPos2i( x, y );
             m_CurrentFont->Render( text );
+        }
+        else
+        {
+            Log::write("ERROR: There is no font set. Please use 'setFont' to select a font you loaded!");
+            shutdown();
+        }
     }
 
 
     void Graphics::drawNumber( int num, int x, int y )
     {
-            char buf[33];
-            int tmp = num;
-            _itoa_s( tmp, buf, 10 );
-
-            drawText( buf, x, y );
+        drawText( std::to_string(num).c_str(), x, y );
     }
 
 
-    void Graphics::setFont( string name )
+    void Graphics::setFont(std::string name, ushort fontSize, color fontColor)
     {
-            map<string, FTGLPixmapFont*>::iterator iter = m_Fonts.find( name );
-            if( iter != m_Fonts.end() )
-            {
-                    m_CurrentFont = m_Fonts[ name ];
-            }
-            else
-            {
-                    (*Log) << string("ERROR: There is no font loaded with this name! Name: ")+name;
-            }
+        std::map<std::string, FTGLPixmapFont*>::iterator iter = m_Fonts.find( name );
+        if( iter != m_Fonts.end() )
+        {
+            m_CurrentFont = m_Fonts[ name ];
+            m_CurrentFont->FaceSize(fontSize);
+            setFontColor(fontColor);
+        }
+        else
+        {
+            Log::write(std::string("ERROR: There is no font loaded with this name! Name: ")+name);
+        }
     }
 
 
-    bool Graphics::loadFont( const char* font, string name )
+    bool Graphics::loadFont( const char* font, std::string name )
     {
-            m_Fonts[ name ] = new FTGLPixmapFont( font );
+        m_Fonts[ name ] = new FTGLPixmapFont( font );
 
-            if(m_Fonts[ name ]->Error()) 
-            {
-                    (*Log) << string("ERROR: Font was not loaded ! Path: ")+font;
-                    return false;
-            }
-            (*Log) << string("Loaded font file successful. ")+name+" | "+font;
-            return true;
+        if(m_Fonts[ name ]->Error()) 
+        {
+            Log::write(std::string("ERROR: Font was not loaded ! Path: ")+font);
+            return false;
+        }
+        
+        Log::write(std::string("Loaded font file successful. ")+name+" | "+font);
+        return true;
     }
 
 
-    void Graphics::setFontColor( double r, double g, double b )
+    void Graphics::setFontColor( color c )
     {
-            if( r > 0 ) r = -1 + r;
-            else r = -1;
+        if( c.r > 0 ) c.r = -1 + c.r;
+        else c.r = -1;
 
-            if( g > 0 ) g = -1 + g;
-            else g = -1;
+        if( c.g > 0 ) c.g = -1 + c.g;
+        else c.g = -1;
 
-            if( b > 0 ) b = -1 + b;
-            else b = -1;
+        if( c.b > 0 ) c.b = -1 + c.b;
+        else c.b = -1;
+        
+        if( c.a > 0 ) c.a = -1 + c.a;
+        else c.a = -1;
 
-            glPixelTransferf( GL_RED_BIAS, r );
-            glPixelTransferf( GL_GREEN_BIAS, g );
-            glPixelTransferf( GL_BLUE_BIAS, b );
+        glPixelTransferf( GL_RED_BIAS, c.r );
+        glPixelTransferf( GL_GREEN_BIAS, c.g );
+        glPixelTransferf( GL_BLUE_BIAS, c.b );
+        glPixelTransferf( GL_ALPHA_BIAS, c.a );
     }
-
 
     void Graphics::setFontSize( int size )
     {
+        if(m_CurrentFont != NULL)
+        {
             m_CurrentFont->FaceSize( size );
-    }*/
+        }
+        else
+        {
+            Log::write("ERROR: There is no font set. Please use 'setFont' to select a font you loaded!");
+            shutdown();
+        }
+    }
 
     void Graphics::swapWindow()
     {
@@ -411,15 +429,12 @@ namespace AL
 
     void Graphics::shutdown()
     {
-        //delete m_Window;
-         //m_Window = 0;
         SDL_GL_DeleteContext(m_GLcontext);
-        
         SDL_DestroyWindow(m_Window);
-          //  delete m_CurrentFont;
-           // m_CurrentFont = 0;
-
-           // m_Fonts.clear();
+        
+        delete m_CurrentFont;
+        m_Fonts.clear();
+        
         SDL_Quit();
     }
 }
