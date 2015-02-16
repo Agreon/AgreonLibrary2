@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Graphics.o \
 	${OBJECTDIR}/Input.o \
 	${OBJECTDIR}/Log.o \
+	${OBJECTDIR}/Sound.o \
 	${OBJECTDIR}/main.o
 
 
@@ -55,7 +56,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lSDL2main -lSDL2 -lGL -lSDL2_image
+LDLIBSOPTIONS=-lSDL2main -lSDL2 -lGL -lSDL2_image -lSDL2_mixer
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -79,6 +80,11 @@ ${OBJECTDIR}/Log.o: Log.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Log.o Log.cpp
+
+${OBJECTDIR}/Sound.o: Sound.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../../../../../SDL_MINGW/SDL2-2.0.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sound.o Sound.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -8,6 +8,7 @@
       <itemPath>Graphics.h</itemPath>
       <itemPath>Input.h</itemPath>
       <itemPath>Log.h</itemPath>
+      <itemPath>Sound.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -19,6 +20,7 @@
       <itemPath>Graphics.cpp</itemPath>
       <itemPath>Input.cpp</itemPath>
       <itemPath>Log.cpp</itemPath>
+      <itemPath>Sound.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -50,7 +52,7 @@
         </ccTool>
         <linkerTool>
           <linkerLibItems>
-            <linkerOptionItem>-lSDL2main -lSDL2 -lGL -lSDL2_image</linkerOptionItem>
+            <linkerOptionItem>-lSDL2main -lSDL2 -lGL -lSDL2_image -lSDL2_mixer</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -67,6 +69,10 @@
       <item path="Log.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Log.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Sound.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Sound.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -104,6 +110,10 @@
       <item path="Log.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Log.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Sound.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Sound.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

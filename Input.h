@@ -59,29 +59,29 @@ namespace AL
 	*   @returns    if key is pressed.
 	*/
 	bool isKeyPressed( SDL_Keycode key );
-        
+            
         /**
 	*   Checks if a key is released.
-	*
+	*   
 	*   @param key	A key in SDL format.
 	*   @returns    if key is released.
 	*/
 	bool isKeyReleased( SDL_Keycode key );
-        
+            
         /**
-         * Checks if a key is pressed.
-         * 
-         * @param key   A key as char.
-         * @return      if key is pressed.
-         */
+        *   Checks if a key is pressed.
+        *
+        *   @param key  A key as char.
+        *   @return     if key is pressed.
+        */
         bool isKeyPressed(char key);
         
         /**
-         * Checks if a key is released.
-         * 
-         * @param key   A key as char.
-         * @return      if key is released.
-         */
+        *   Checks if a key is released.
+        * 
+        *   @param key   A key as char.
+        *   @return      if key is released.
+        */
         bool isKeyReleased(char key);
         
 	/**
@@ -115,8 +115,8 @@ namespace AL
 	int getMousePositionY();
         
         /**
-         *  @returns if the app was closed by the user. 
-         */
+        *   @returns if the app was closed by the user. 
+        */
         bool appClosed();
         
     private:

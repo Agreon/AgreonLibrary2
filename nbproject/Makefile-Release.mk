@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Graphics.o \
 	${OBJECTDIR}/Input.o \
 	${OBJECTDIR}/Log.o \
+	${OBJECTDIR}/Sound.o \
 	${OBJECTDIR}/main.o
 
 
@@ -79,6 +80,11 @@ ${OBJECTDIR}/Log.o: Log.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Log.o Log.cpp
+
+${OBJECTDIR}/Sound.o: Sound.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sound.o Sound.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -9,6 +9,7 @@
 #include <memory>
 #include "AL.h"
 #include "Input.h"
+#include "Sound.h"
 
 int main(int argc, char** argv)
 {
@@ -23,13 +24,22 @@ int main(int argc, char** argv)
     
     std::auto_ptr<AL::Graphics> g(new AL::Graphics);
     std::auto_ptr<AL::Input> input(new AL::Input);
-    g->init(800,600,"Der Start",NULL);
+    std::auto_ptr<AL::Sound> sound(new AL::Sound);
+    
+    g->init(800,600,"Agreon Library 2",NULL);
         
     if(!g->loadTexture("data/agreon_logo.png","agreon_logo"))
     {
         running = false;
     }
-            
+    
+    AL::Graphics *g2 = new AL::Graphics();
+        
+    if(!sound->loadSound("data/wolf_howl.wav","wolf_howl"));
+    
+    sound->playSound("wolf_howl");
+    sound->setVolume(10);
+    
     while(running)
     {
         input->handleInput();

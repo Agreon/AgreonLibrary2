@@ -1,7 +1,7 @@
 /* 
  * @file:   Graphics.cpp
  * @author: daniel
- *  @brief This file contains the cGraphics functions.
+ *  @brief This file contains the Graphics functions.
  * 
  * Created on February 2, 2015, 5:12 PM
  */
