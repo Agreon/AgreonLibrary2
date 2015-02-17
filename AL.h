@@ -9,6 +9,7 @@
 #define	AL_H
 
 #include "Graphics.h"
+#include "Animation.h"
 #include "Input.h"
 #include "Sound.h"
 
